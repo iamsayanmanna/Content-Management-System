@@ -1,0 +1,526 @@
+/* =========================================================
+   PENSPACE — AUTHOR REGISTRATION PAGE
+   Consolidated stylesheet. Replace AuthorRegister.css fully.
+   Scoped to .register-page; does not affect other pages.
+   ========================================================= */
+
+.register-page,
+.register-page * {
+  box-sizing: border-box;
+}
+
+.register-page {
+  --register-ink: #14251b;
+  --register-green: #284b36;
+  --register-green-deep: #203e2c;
+  --register-muted: #7e8178;
+  --register-line: #deded3;
+  --register-paper: #f8f7f2;
+  --register-sage: #e9ede3;
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100svh;
+  overflow: hidden;
+  color: var(--register-ink);
+  background: var(--register-paper);
+  font-family: Inter, "Segoe UI", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* LEFT: BRANDING + PROVIDED STILL-LIFE ASSET */
+.register-brand-panel {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-width: 0;
+  min-height: 100vh;
+  min-height: 100svh;
+  padding: clamp(2.2rem, 3.2vw, 4rem) clamp(1.8rem, 3.2vw, 4rem);
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 14% 26%, rgba(255,255,255,.88), transparent 47%),
+    radial-gradient(ellipse at 80% 70%, rgba(222,218,202,.24), transparent 48%),
+    linear-gradient(145deg, #f1ede3 0%, #eeeade 56%, #e9e6da 100%);
+}
+
+.register-brand-panel::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(255,255,255,.12), transparent 58%, rgba(247,245,237,.28));
+}
+
+.register-brand {
+  position: relative;
+  z-index: 4;
+  flex: 0 0 auto;
+}
+
+.register-brand-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: .78rem;
+  color: var(--register-ink);
+  text-decoration: none;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.8rem, 2.15vw, 2.65rem);
+  font-weight: 700;
+  letter-spacing: -.055em;
+  line-height: 1;
+}
+
+.register-brand-logo > span:last-child > span {
+  color: #788572;
+  font-weight: 400;
+}
+
+.register-brand-mark {
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  width: clamp(44px, 3.4vw, 60px);
+  aspect-ratio: 1;
+  border-radius: 12px;
+  background: var(--register-green);
+  color: #fff;
+  font-size: clamp(1.9rem, 2.5vw, 2.7rem);
+  line-height: 1;
+  box-shadow: 0 5px 15px rgba(30,52,37,.12);
+}
+
+.register-brand-rule {
+  display: block;
+  width: 36px;
+  height: 1px;
+  margin: 1.2rem 0 .85rem;
+  background: #9ba28f;
+}
+
+.register-brand-tagline {
+  margin: 0;
+  color: #526052;
+  font-size: clamp(.62rem, .72vw, .78rem);
+  font-weight: 500;
+  letter-spacing: .25em;
+  line-height: 2.05;
+  text-transform: uppercase;
+}
+
+.register-stilllife {
+  position: absolute;
+  z-index: 1;
+  left: -2%;
+  bottom: 1.5%;
+  width: 82%;
+  height: 65%;
+  pointer-events: none;
+}
+
+.register-stilllife img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: left bottom;
+  mix-blend-mode: multiply;
+  opacity: .94;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,.12) 5%, #000 17%, #000 88%, transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,.12) 5%, #000 17%, #000 88%, transparent 100%);
+}
+
+.register-handwriting {
+  position: absolute;
+  z-index: 3;
+  top: 43%;
+  right: 5.5%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: .02em;
+  padding-left: .95rem;
+  border-left: 1px solid rgba(123,132,113,.48);
+  color: #778170;
+  font-family: "Segoe Script", "Bradley Hand", "Brush Script MT", cursive;
+  font-size: clamp(1.25rem, 1.8vw, 2.15rem);
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.22;
+  transform: rotate(-3deg);
+  text-shadow: 0 1px 1px rgba(255,255,255,.2);
+}
+
+.register-handwriting span:nth-child(even) {
+  margin-left: .22rem;
+}
+
+.register-brand-bottom {
+  position: relative;
+  z-index: 4;
+  margin-top: auto;
+  padding-top: 1.5rem;
+}
+
+.register-brand-bottom > span {
+  display: block;
+  width: 36px;
+  height: 1px;
+  margin-bottom: .8rem;
+  background: #8b9681;
+}
+
+.register-brand-bottom p {
+  margin: 0;
+  color: #65705f;
+  font-size: clamp(.58rem, .65vw, .72rem);
+  font-weight: 500;
+  letter-spacing: .2em;
+  line-height: 2;
+  text-transform: uppercase;
+}
+
+/* RIGHT: SOFT DECORATIVE BACKGROUND + FORM */
+.register-form-panel {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  place-items: center;
+  min-width: 0;
+  min-height: 100vh;
+  min-height: 100svh;
+  padding: clamp(2rem, 4vw, 4.8rem);
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 100% 25%, rgba(220,225,210,.42) 0, rgba(220,225,210,.16) 16%, transparent 34%),
+    radial-gradient(ellipse at 0% 92%, rgba(233,226,210,.32), transparent 38%),
+    #f8f7f2;
+}
+
+.register-form-panel::before,
+.register-form-panel::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  width: clamp(190px, 23vw, 360px);
+  aspect-ratio: 1;
+  border: 1px solid rgba(166,175,153,.15);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.register-form-panel::before {
+  top: 8%;
+  right: -16%;
+  box-shadow: 0 0 0 24px rgba(166,175,153,.035), 0 0 0 49px rgba(166,175,153,.025);
+}
+
+.register-form-panel::after {
+  bottom: -22%;
+  left: -18%;
+  box-shadow: 0 0 0 32px rgba(166,175,153,.03);
+}
+
+.register-card {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 560px);
+  padding: clamp(2.2rem, 3.2vw, 3.35rem);
+  border: 1px solid rgba(224,222,212,.92);
+  border-radius: 17px;
+  background: rgba(255,254,251,.9);
+  box-shadow: 0 22px 62px rgba(45,53,41,.075), 0 3px 12px rgba(45,53,41,.025);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.register-back {
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+  margin: 0 0 clamp(1.5rem, 2.2vw, 2.1rem);
+  padding: .1rem 0;
+  border: 0;
+  background: transparent;
+  color: #6c7865;
+  font: inherit;
+  font-size: .86rem;
+  cursor: pointer;
+  transition: color .18s ease;
+}
+
+.register-back:hover { color: var(--register-green); }
+.register-back span { border-bottom: 1px solid transparent; }
+.register-back:hover span { border-bottom-color: currentColor; }
+
+.register-eyebrow {
+  margin: 0 0 .95rem;
+  color: #63725d;
+  font-size: clamp(.62rem, .72vw, .74rem);
+  font-weight: 650;
+  letter-spacing: .23em;
+  line-height: 1.6;
+  text-transform: uppercase;
+}
+
+.register-card h1 {
+  margin: 0 0 .7rem;
+  color: #111d16;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(2.7rem, 3.5vw, 4rem);
+  font-weight: 400;
+  letter-spacing: -.065em;
+  line-height: .94;
+}
+
+.register-description {
+  margin: 0;
+  color: #85877f;
+  font-size: clamp(.9rem, .98vw, 1.05rem);
+  line-height: 1.65;
+}
+
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.12rem;
+  margin-top: clamp(1.8rem, 2.5vw, 2.35rem);
+}
+
+.register-field {
+  display: flex;
+  flex-direction: column;
+  gap: .48rem;
+  min-width: 0;
+}
+
+.register-field label {
+  color: #25342a;
+  font-size: .82rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.register-input-wrap {
+  display: flex;
+  align-items: center;
+  gap: .72rem;
+  min-width: 0;
+  min-height: 52px;
+  padding: 0 .9rem;
+  border: 1px solid #d8d8cc;
+  border-radius: 8px;
+  background: rgba(255,255,255,.58);
+  color: #777d73;
+  transition: border-color .18s ease, box-shadow .18s ease, background .18s ease;
+}
+
+.register-input-wrap:focus-within {
+  border-color: #87967f;
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(81,111,83,.09);
+}
+
+.register-input-wrap > svg { flex: 0 0 auto; width: 16px; height: 16px; }
+
+.register-input-wrap input {
+  display: block;
+  flex: 1 1 auto;
+  width: 100%;
+  min-width: 0;
+  min-height: 50px;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: #1b2a20;
+  font: inherit;
+  font-size: .9rem;
+  box-shadow: none;
+}
+
+.register-input-wrap input::placeholder { color: #a0a099; opacity: 1; }
+.register-input-wrap input:focus,
+.register-input-wrap input:focus-visible { outline: 0; box-shadow: none; }
+
+.register-password-toggle {
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  width: 28px;
+  height: 32px;
+  padding: 0;
+  border: 0;
+  border-radius: 5px;
+  background: transparent;
+  color: #777b73;
+  cursor: pointer;
+}
+
+.register-password-toggle:hover { background: #f0f1e9; color: var(--register-green); }
+
+.register-password-toggle:focus-visible,
+.register-back:focus-visible,
+.register-submit:focus-visible {
+  outline: 3px solid rgba(63,101,72,.35);
+  outline-offset: 3px;
+}
+
+.register-error {
+  margin: -.1rem 0 0;
+  padding: .75rem .9rem;
+  border: 1px solid #e8c7bf;
+  border-radius: 8px;
+  background: #fff5f2;
+  color: #9b3429;
+  font-size: .86rem;
+  line-height: 1.5;
+}
+
+.register-submit {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  width: 100%;
+  min-height: 56px;
+  margin-top: .05rem;
+  padding: .9rem 1.15rem;
+  border: 1px solid var(--register-green);
+  border-radius: 8px;
+  background: linear-gradient(110deg, #254832, #2e513b);
+  color: #fff;
+  font: inherit;
+  font-size: .94rem;
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+  box-shadow: 0 5px 12px rgba(34,64,44,.08);
+  transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+}
+
+.register-submit > svg { flex: 0 0 auto; width: 18px; height: 18px; }
+.register-submit:hover:not(:disabled) { transform: translateY(-1px); background: #1f402c; box-shadow: 0 8px 18px rgba(34,64,44,.14); }
+.register-submit:disabled { cursor: wait; opacity: .72; }
+
+.register-card-note {
+  margin: 1.1rem 0 0;
+  color: #a0a095;
+  font-size: .69rem;
+  letter-spacing: .025em;
+  line-height: 1.6;
+  text-align: center;
+}
+
+/* LAPTOPS / TABLETS */
+@media (max-width: 1100px) {
+  .register-brand-panel { padding: 2.3rem 2rem; }
+  .register-stilllife { left: -5%; width: 86%; height: 59%; }
+  .register-handwriting { right: 4%; font-size: clamp(1.15rem, 2vw, 1.7rem); }
+  .register-form-panel { padding: 2rem 1.5rem; }
+  .register-card { padding: 2.25rem; }
+  .register-card h1 { font-size: clamp(2.65rem, 4vw, 3.5rem); }
+}
+
+@media (max-height: 760px) and (min-width: 701px) {
+  .register-brand-panel, .register-form-panel { min-height: 760px; }
+  .register-card { padding: 1.8rem 2.1rem; }
+  .register-back { margin-bottom: 1.2rem; }
+  .register-form { gap: .82rem; margin-top: 1.45rem; }
+  .register-input-wrap { min-height: 46px; }
+  .register-input-wrap input { min-height: 44px; }
+  .register-submit { min-height: 50px; }
+  .register-card-note { margin-top: .8rem; }
+}
+
+/* MOBILE: image remains decorative, form stays usable and unclipped */
+@media (max-width: 700px) {
+  .register-page {
+    grid-template-columns: minmax(0, 1fr);
+    min-height: 100vh;
+    min-height: 100svh;
+    overflow: visible;
+  }
+
+  .register-brand-panel {
+    min-height: 310px;
+    padding: 1.5rem 1.35rem;
+  }
+
+  .register-brand-logo { font-size: 1.75rem; }
+  .register-brand-mark { width: 43px; border-radius: 10px; font-size: 2rem; }
+  .register-brand-rule { margin: .85rem 0 .55rem; }
+  .register-brand-tagline { font-size: .61rem; letter-spacing: .19em; line-height: 1.8; }
+
+  .register-stilllife {
+    left: -4%;
+    bottom: -2%;
+    width: 76%;
+    height: 73%;
+  }
+
+  .register-stilllife img { object-position: left bottom; }
+
+  .register-handwriting {
+    top: auto;
+    right: 6%;
+    bottom: 20%;
+    padding-left: .65rem;
+    font-size: clamp(1.05rem, 4.8vw, 1.45rem);
+    line-height: 1.18;
+  }
+
+  .register-brand-bottom { padding-top: 1rem; }
+  .register-brand-bottom > span { margin-bottom: .5rem; }
+  .register-brand-bottom p { font-size: .55rem; letter-spacing: .15em; }
+
+  .register-form-panel {
+    min-height: auto;
+    padding: 1.4rem 1rem 2rem;
+    overflow: visible;
+  }
+
+  .register-card {
+    width: min(100%, 500px);
+    padding: 1.7rem 1.35rem;
+    border-radius: 15px;
+  }
+
+  .register-back { margin-bottom: 1.35rem; }
+  .register-eyebrow { font-size: .63rem; letter-spacing: .19em; }
+  .register-card h1 { font-size: clamp(2.65rem, 10vw, 3.4rem); }
+  .register-description { font-size: .92rem; }
+  .register-form { gap: 1rem; margin-top: 1.55rem; }
+  .register-field label { font-size: .8rem; }
+  .register-input-wrap { min-height: 50px; padding-inline: .75rem; }
+  .register-input-wrap input { min-height: 48px; font-size: .9rem; }
+  .register-submit { min-height: 53px; font-size: .92rem; }
+}
+
+@media (max-width: 380px) {
+  .register-brand-panel { min-height: 280px; padding: 1.25rem 1rem; }
+  .register-brand-logo { font-size: 1.55rem; }
+  .register-brand-mark { width: 39px; }
+  .register-stilllife { width: 78%; height: 68%; }
+  .register-handwriting { right: 4%; font-size: 1rem; }
+  .register-card { padding: 1.45rem 1rem; }
+  .register-card h1 { font-size: 2.5rem; }
+  .register-input-wrap { gap: .5rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .register-page *,
+  .register-page *::before,
+  .register-page *::after {
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}

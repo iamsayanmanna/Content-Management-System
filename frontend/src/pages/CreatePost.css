@@ -1,0 +1,295 @@
+
+.create-post-page {
+  min-height: 100vh;
+  background: #f7f6f2;
+  color: #202720;
+  font-family: "DM Sans", sans-serif;
+}
+
+.create-post-header {
+  min-height: 76px;
+  padding: 0 7%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  background: #ffffff;
+  border-bottom: 1px solid #e8e8e1;
+}
+
+.create-post-brand {
+  color: #203b2c;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 25px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.create-post-brand span {
+  color: #64836a;
+}
+
+.create-post-cancel {
+  border: 0;
+  background: transparent;
+  color: #536456;
+  font: inherit;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.create-post-cancel:hover {
+  color: #244a32;
+}
+
+.create-post-content {
+  width: min(760px, 88%);
+  margin: 0 auto;
+  padding: 64px 0 80px;
+}
+
+.create-post-eyebrow {
+  margin: 0 0 12px;
+  color: #64836a;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.create-post-content h1 {
+  margin: 0;
+  color: #203b2c;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(32px, 5vw, 44px);
+  font-weight: 500;
+  letter-spacing: -1.2px;
+}
+
+.create-post-description {
+  margin: 14px 0 34px;
+  color: #72786f;
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.create-post-form {
+  padding: 30px;
+  background: #ffffff;
+  border: 1px solid #e7e8e0;
+  border-radius: 14px;
+  box-shadow: 0 12px 35px rgba(32, 59, 44, 0.04);
+}
+
+.create-post-field {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  margin-bottom: 24px;
+}
+
+.create-post-field label {
+  color: #303b31;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.create-post-field input,
+.create-post-field textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 14px 15px;
+  border: 1px solid #dedfd7;
+  border-radius: 8px;
+  outline: none;
+  background: #fdfdfb;
+  color: #263329;
+  font: inherit;
+  font-size: 14px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.create-post-field input::placeholder,
+.create-post-field textarea::placeholder {
+  color: #a0a49b;
+}
+
+.create-post-field input:focus,
+.create-post-field textarea:focus {
+  border-color: #64836a;
+  box-shadow: 0 0 0 3px rgba(100, 131, 106, 0.12);
+}
+
+.create-post-field textarea {
+  resize: vertical;
+  line-height: 1.7;
+}
+
+.create-post-field .post-content-editor {
+  min-height: 260px;
+  line-height: 1.8;
+}
+
+.create-post-actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.create-post-secondary,
+.create-post-submit {
+  min-height: 44px;
+  padding: 0 20px;
+  border-radius: 8px;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.create-post-secondary {
+  border: 1px solid #dedfd7;
+  background: #ffffff;
+  color: #465247;
+}
+
+.create-post-secondary:hover {
+  background: #f4f5f0;
+}
+
+.create-post-submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  border: 1px solid #294a34;
+  background: #294a34;
+  color: #ffffff;
+}
+
+.create-post-submit:hover {
+  background: #203b2c;
+  transform: translateY(-1px);
+}
+
+.create-post-submit:focus-visible,
+.create-post-secondary:focus-visible,
+.create-post-cancel:focus-visible {
+  outline: 3px solid #91ad96;
+  outline-offset: 3px;
+}
+
+.create-post-note {
+  margin: 20px 0 0;
+  color: #858a80;
+  font-size: 12px;
+  line-height: 1.6;
+  text-align: center;
+}
+
+@media (max-width: 600px) {
+  .create-post-header {
+    padding: 0 6%;
+  }
+
+  .create-post-content {
+    width: 90%;
+    padding: 42px 0 56px;
+  }
+
+  .create-post-form {
+    padding: 22px 18px;
+  }
+
+  .create-post-actions {
+    flex-direction: column-reverse;
+    align-items: stretch;
+  }
+
+  .create-post-secondary,
+  .create-post-submit {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .create-post-field input,
+  .create-post-field textarea,
+  .create-post-submit {
+    transition: none;
+  }
+}
+
+
+
+
+
+
+/* Post Preview */
+.post-preview {
+  margin-top: 20px;
+  padding: 24px;
+  border: 1px solid #d9d9d9;
+  border-radius: 12px;
+  background: #ffffff;
+  color: #222222;
+  overflow-wrap: anywhere;
+}
+
+.post-preview h2 {
+  margin: 0 0 16px;
+  font-size: 28px;
+  line-height: 1.3;
+}
+
+.post-preview img {
+  display: block;
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+  margin: 16px 0;
+  border-radius: 8px;
+}
+
+.post-preview > p {
+  color: #666666;
+  line-height: 1.6;
+}
+
+.post-preview-content {
+  margin-top: 20px;
+  line-height: 1.8;
+}
+
+.post-preview-content h1,
+.post-preview-content h2,
+.post-preview-content h3 {
+  margin: 20px 0 12px;
+}
+
+.post-preview-content ul,
+.post-preview-content ol {
+  padding-left: 24px;
+}
+
+.post-preview-content a {
+  color: #2563eb;
+  text-decoration: underline;
+}
+
+.post-preview-content pre {
+  padding: 12px;
+  overflow-x: auto;
+  border-radius: 8px;
+  background: #f3f4f6;
+}
+
+.post-preview-content blockquote {
+  margin-left: 0;
+  padding-left: 16px;
+  border-left: 3px solid #9ca3af;
+  color: #666666;
+}
