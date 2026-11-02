@@ -97,7 +97,16 @@ export async function registerAuthor(username, email, password) {
   return data;
 }
 
-export async function updateAuthorProfile(username, email) {
+
+export async function updateAuthorProfile(
+  username,
+  email,
+  bio = "",
+  website = "",
+  instagram = "",
+  linkedin = "",
+  github = ""
+) {
   const response = await fetch(
     `${API_BASE_URL}/update-profile.php`,
     {
@@ -106,7 +115,15 @@ export async function updateAuthorProfile(username, email) {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ username, email }),
+      body: JSON.stringify({
+        username,
+        email,
+        bio,
+        website,
+        instagram,
+        linkedin,
+        github,
+      }),
     }
   );
 
@@ -118,6 +135,7 @@ export async function updateAuthorProfile(username, email) {
 
   return data;
 }
+
 
 
 export async function changeAuthorPassword(currentPassword, newPassword) {
@@ -140,6 +158,46 @@ export async function changeAuthorPassword(currentPassword, newPassword) {
 
   if (!response.ok || !data.success) {
     throw new Error(data.message || "Unable to change password.");
+  }
+
+  return data;
+}
+
+
+
+
+
+
+export async function uploadAuthorProfileImage(imageFile) {
+  const formData = new FormData();
+
+  formData.append("profile_image", imageFile);
+
+  let response;
+
+  try {
+    response = await fetch(
+      `${API_BASE_URL}/upload-profile-image.php`,
+      {
+        method: "POST",
+        credentials: "include",
+        body: formData,
+      }
+    );
+  } catch {
+    throw new Error("Cannot connect to the server. Please try again.");
+  }
+
+  let data;
+
+  try {
+    data = await response.json();
+  } catch {
+    throw new Error("The server returned an invalid response.");
+  }
+
+  if (!response.ok || !data.success) {
+    throw new Error(data.message || "Unable to upload profile photo.");
   }
 
   return data;

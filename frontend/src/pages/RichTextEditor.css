@@ -1,0 +1,168 @@
+
+.rich-text-editor {
+  width: 100%;
+  color: #263329;
+  font-family: "DM Sans", sans-serif;
+}
+
+.editor-mode-switch {
+  display: flex;
+  gap: 8px;
+  padding: 8px;
+  margin-bottom: 12px;
+  background: #f4f5f0;
+  border: 1px solid #e2e5dc;
+  border-radius: 9px;
+}
+
+.editor-mode-switch button,
+.rich-editor-toolbar button {
+  padding: 8px 13px;
+  border: 1px solid #dedfd7;
+  border-radius: 6px;
+  background: #fff;
+  color: #465247;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.editor-mode-switch button[aria-pressed="true"] {
+  background: #294a34;
+  border-color: #294a34;
+  color: #fff;
+}
+
+.editor-mode-switch button:hover,
+.rich-editor-toolbar button:hover {
+  border-color: #64836a;
+  color: #294a34;
+}
+
+.rich-editor-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 12px;
+  background: #f7f8f4;
+  border: 1px solid #dedfd7;
+  border-bottom: 0;
+  border-radius: 9px 9px 0 0;
+}
+
+.rich-editor-toolbar button[aria-pressed="true"] {
+  background: #e5ede5;
+  border-color: #64836a;
+  color: #294a34;
+}
+
+.rich-editor-area .tiptap {
+  min-height: 280px;
+  padding: 18px;
+  border: 1px solid #dedfd7;
+  border-radius: 0 0 9px 9px;
+  outline: none;
+  background: #fff;
+  color: #303b31;
+  font-size: 14px;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+}
+
+.rich-editor-area .tiptap:focus {
+  border-color: #64836a;
+  box-shadow: 0 0 0 3px rgba(100, 131, 106, 0.1);
+}
+
+.rich-editor-area .tiptap p {
+  margin: 0 0 14px;
+}
+
+.rich-editor-area .tiptap h1,
+.rich-editor-area .tiptap h2,
+.rich-editor-area .tiptap h3 {
+  margin: 22px 0 12px;
+  color: #203b2c;
+  font-family: "Playfair Display", Georgia, serif;
+  line-height: 1.35;
+}
+
+.rich-editor-area .tiptap h1 {
+  font-size: 30px;
+}
+
+.rich-editor-area .tiptap h2 {
+  font-size: 25px;
+}
+
+.rich-editor-area .tiptap h3 {
+  font-size: 20px;
+}
+
+.rich-editor-area .tiptap ul,
+.rich-editor-area .tiptap ol {
+  padding-left: 25px;
+  margin-bottom: 16px;
+}
+
+.rich-editor-area .tiptap blockquote {
+  margin: 18px 0;
+  padding: 10px 16px;
+  border-left: 3px solid #64836a;
+  background: #f7f8f4;
+  color: #667267;
+}
+
+.rich-editor-area .tiptap a {
+  color: #416b4a;
+  text-decoration: underline;
+}
+
+.rich-editor-area .tiptap p.is-editor-empty:first-child::before {
+  content: "Start writing your story...";
+  float: left;
+  height: 0;
+  color: #a0a49b;
+  pointer-events: none;
+}
+
+.markdown-editor {
+  display: block;
+  width: 100%;
+  min-height: 320px;
+  box-sizing: border-box;
+  padding: 18px;
+  border: 1px solid #dedfd7;
+  border-radius: 9px;
+  outline: none;
+  background: #fff;
+  color: #303b31;
+  font-family: Consolas, monospace;
+  font-size: 13px;
+  line-height: 1.8;
+  resize: vertical;
+}
+
+.markdown-editor:focus {
+  border-color: #64836a;
+  box-shadow: 0 0 0 3px rgba(100, 131, 106, 0.1);
+}
+
+@media (max-width: 600px) {
+  .rich-editor-toolbar {
+    gap: 6px;
+    padding: 9px;
+  }
+
+  .rich-editor-toolbar button {
+    padding: 7px 9px;
+    font-size: 11px;
+  }
+
+  .rich-editor-area .tiptap {
+    min-height: 220px;
+    padding: 14px;
+  }
+}

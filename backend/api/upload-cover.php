@@ -113,5 +113,5 @@ if (!move_uploaded_file($file['tmp_name'], $destination)) {
 sendJson(201, [
     'success' => true,
     'message' => 'Cover image uploaded successfully.',
-    'cover_image' => 'uploads/' . $filename,
+    'cover_image' => 'http://localhost/Content-Management-System/backend/uploads/' . $filename,
 ]);

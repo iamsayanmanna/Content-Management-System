@@ -10,13 +10,25 @@ import DOMPurify from "dompurify";
 
 
 function getCoverImageSrc(article) {
-  const rawPath = article?.cover_image || article?.coverImage || article?.featured_image || "";
+  const rawPath =
+    article?.cover_image ||
+    article?.coverImage ||
+    article?.featured_image ||
+    "";
+
   const path = String(rawPath).trim();
+
   if (!path) return "";
-  if (/^(https?:|data:|blob:)/i.test(path)) return path;
-  // Cover images are stored by the backend as relative paths. Keep absolute
-  // paths absolute and normalize relative uploads paths from the site root.
-  return `/${path.replace(/^\.\//, "").replace(/^\/+/, "")}`;
+
+  if (/^(https?:|data:|blob:)/i.test(path)) {
+    return path;
+  }
+
+  const cleanPath = path
+    .replace(/^\.\//, "")
+    .replace(/^\/+/, "");
+
+  return `http://localhost/Content-Management-System/backend/${cleanPath}`;
 }
 
 function getPublishedDate(value) {
@@ -227,7 +239,19 @@ if (selectedArticle) {
       </header>
 
       <article className="article-reading-content">
-        <p className="eyebrow">THE JOURNAL</p>
+  <p className="eyebrow">THE JOURNAL</p>
+
+  {getCoverImageSrc(selectedArticle) && (
+    <div className="article-reading-cover">
+      <img
+        src={getCoverImageSrc(selectedArticle)}
+        alt={`Cover image for ${selectedArticle.title}`}
+        onError={(event) => {
+          event.currentTarget.parentElement.style.display = "none";
+        }}
+      />
+    </div>
+  )}
         
 {selectedArticle.category && (
   <p className="article-category">

@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 function sendJson(int $status, array $data): void
 {
     http_response_code($status);
-    echo json_encode($data);
+    echo json_encode($data, JSON_UNESCAPED_UNICODE);
     exit;
 }
 
@@ -51,6 +51,12 @@ if (!is_array($input)) {
 
 $username = trim($input['username'] ?? '');
 $email = trim($input['email'] ?? '');
+$bio = trim($input['bio'] ?? '');
+
+$website = trim($input['website'] ?? '');
+$instagram = trim($input['instagram'] ?? '');
+$linkedin = trim($input['linkedin'] ?? '');
+$github = trim($input['github'] ?? '');
 
 if ($username === '' || strlen($username) > 50) {
     sendJson(422, [
@@ -59,23 +65,70 @@ if ($username === '' || strlen($username) > 50) {
     ]);
 }
 
-if ($email === '' || strlen($email) > 150 || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+if (
+    $email === '' ||
+    strlen($email) > 150 ||
+    !filter_var($email, FILTER_VALIDATE_EMAIL)
+) {
     sendJson(422, [
         'success' => false,
         'message' => 'Please enter a valid email address.'
     ]);
 }
 
+if (strlen($bio) > 1000) {
+    sendJson(422, [
+        'success' => false,
+        'message' => 'Bio must be at most 1000 characters.'
+    ]);
+}
+
+$links = [
+    'Website' => $website,
+    'Instagram' => $instagram,
+    'LinkedIn' => $linkedin,
+    'GitHub' => $github
+];
+
+foreach ($links as $label => $url) {
+    if ($url !== '' && (
+        strlen($url) > 255 ||
+        !filter_var($url, FILTER_VALIDATE_URL) ||
+        !in_array(
+            strtolower(parse_url($url, PHP_URL_SCHEME) ?? ''),
+            ['http', 'https'],
+            true
+        )
+    )) {
+        sendJson(422, [
+            'success' => false,
+            'message' => 'Please enter a valid ' . $label . ' URL.'
+        ]);
+    }
+}
+
 try {
     $statement = $pdo->prepare(
         'UPDATE authors
-         SET username = :username, email = :email
+         SET
+            username = :username,
+            email = :email,
+            bio = :bio,
+            website = :website,
+            instagram = :instagram,
+            linkedin = :linkedin,
+            github = :github
          WHERE id = :id'
     );
 
     $statement->execute([
         ':username' => $username,
         ':email' => $email,
+        ':bio' => $bio,
+        ':website' => $website ?: null,
+        ':instagram' => $instagram ?: null,
+        ':linkedin' => $linkedin ?: null,
+        ':github' => $github ?: null,
         ':id' => $authorId
     ]);
 
@@ -83,6 +136,7 @@ try {
         'success' => true,
         'message' => 'Profile updated successfully.'
     ]);
+
 } catch (PDOException $e) {
     if ($e->getCode() === '23000') {
         sendJson(409, [
