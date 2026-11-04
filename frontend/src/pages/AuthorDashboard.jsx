@@ -41,6 +41,7 @@ const Icon = ({ name, size = 20 }) => {
 
 function AuthorDashboard() {
   const [showCreatePost, setShowCreatePost] = useState(false);
+  const [selectedTemplate, setSelectedTemplate] = useState(null);
   const [showProfile, setShowProfile] = useState(false);
   const [posts, setPosts] = useState([]);
   const [statusFilter, setStatusFilter] = useState("all");
@@ -55,6 +56,24 @@ function AuthorDashboard() {
     type: "",
     message: "",
   });
+
+  useEffect(() => {
+  const savedTemplate = sessionStorage.getItem("penspace_selected_template");
+
+  if (savedTemplate) {
+    try {
+      const template = JSON.parse(savedTemplate);
+
+      setSelectedTemplate(template);
+      setShowCreatePost(true);
+
+      sessionStorage.removeItem("penspace_selected_template");
+    } catch (error) {
+      console.error("Failed to load selected template:", error);
+      sessionStorage.removeItem("penspace_selected_template");
+    }
+  }
+}, []);
 
   const postsPerPage = 5;
 
@@ -164,11 +183,13 @@ function AuthorDashboard() {
   if (showCreatePost || editingPost) {
     return (
       <CreatePost
-        initialPost={editingPost}
+  initialPost={editingPost}
+  selectedTemplate={selectedTemplate}
         onCancel={() => {
-          setShowCreatePost(false);
-          setEditingPost(null);
-        }}
+  setShowCreatePost(false);
+  setEditingPost(null);
+  setSelectedTemplate(null);
+}}
         onPublish={(post, selectedStatus) => {
           setPosts((currentPosts) => {
             const updatedPost = {

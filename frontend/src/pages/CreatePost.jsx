@@ -26,7 +26,19 @@ const CATEGORIES = [
   "Personal Growth",
 ];
 
-function CreatePost({ onCancel, onPublish, initialPost = null }) {
+
+
+function CreatePost({ onCancel, onPublish, initialPost = null, selectedTemplate = null, }) {
+
+  const activeTemplate = selectedTemplate || (
+  initialPost?.template_name
+    ? {
+        name: initialPost.template_name,
+        style: initialPost.template_style,
+      }
+    : null
+);
+
   const [title, setTitle] = useState(initialPost?.title ?? "");
   const [excerpt, setExcerpt] = useState(initialPost?.excerpt ?? "");
   const [content, setContent] = useState(initialPost?.content ?? "");
@@ -99,7 +111,10 @@ function CreatePost({ onCancel, onPublish, initialPost = null }) {
         status: selectedStatus,
         cover_image: uploadedCoverImage,
         category,
+        template_name: selectedTemplate?.name ?? initialPost?.template_name ?? null,
+template_style: selectedTemplate?.style ?? initialPost?.template_style ?? null,
         tags: selectedTags,
+        
       };
 
       const result = initialPost
@@ -153,8 +168,17 @@ function CreatePost({ onCancel, onPublish, initialPost = null }) {
     setCoverImage(file);
   }
 
-  return (
-    <main className="create-post-page">
+    return (
+    <>
+      {activeTemplate && (
+        <div className="selected-template-banner">
+          <span>Selected Template</span>
+          <strong>{activeTemplate.name}</strong>
+          <small>{activeTemplate.style} Style</small>
+        </div>
+      )}
+
+      <main className="create-post-page">
 
       {/* HEADER */}
       <header className="create-post-header">
@@ -518,7 +542,13 @@ function CreatePost({ onCancel, onPublish, initialPost = null }) {
                 </button>
 
                 {showPreview && (
-                  <article className="post-preview">
+  <article
+    className={`post-preview ${
+  activeTemplate
+    ? `template-${activeTemplate.style.toLowerCase().replace(/\s+/g, "-")}`
+    : "template-default"
+}`}
+  >
 
                     {currentCover && (
                       <img src={currentCover} alt="Story cover" />
@@ -625,6 +655,7 @@ function CreatePost({ onCancel, onPublish, initialPost = null }) {
         </form>
       </div>
     </main>
+     </>
   );
 }
 

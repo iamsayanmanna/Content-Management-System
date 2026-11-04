@@ -38,8 +38,9 @@ if ($method === 'GET') {
 
         $statement = $pdo->prepare(
     "SELECT id, author_id, title, excerpt, content, status,
-            category, created_at, updated_at, cover_image
-     FROM posts
+        category, created_at, updated_at, cover_image,
+        template_name, template_style
+ FROM posts
      WHERE author_id = :author_id
      ORDER BY created_at DESC"
 );
@@ -59,6 +60,8 @@ if ($method === 'GET') {
         p.updated_at,
         p.cover_image,
 p.category,
+p.template_name,
+p.template_style,
 a.username AS author_name
      FROM posts p
      INNER JOIN authors a ON a.id = p.author_id
@@ -116,6 +119,8 @@ if ($method === 'PUT') {
     $content = trim($input['content'] ?? '');
     $coverImage = $input['cover_image'] ?? null;
     $category = trim($input['category'] ?? '');
+    $templateName = trim($input['template_name'] ?? '');
+$templateStyle = trim($input['template_style'] ?? '');
 
     $tags = $input['tags'] ?? [];
 
@@ -177,6 +182,8 @@ if (!in_array($status, ['draft', 'published'], true)) {
      content = :content,
      status = :status,
      category = :category,
+          template_name = :template_name,
+     template_style = :template_style,
      cover_image = COALESCE(:cover_image, cover_image),
      updated_at = CURRENT_TIMESTAMP
  WHERE id = :id AND author_id = :author_id"
@@ -193,6 +200,8 @@ if (!in_array($status, ['draft', 'published'], true)) {
         'id' => $id,
         'author_id' => (int) $_SESSION['author_id'],
         'category' => $category !== '' ? $category : null,
+        'template_name' => $templateName !== '' ? $templateName : null,
+'template_style' => $templateStyle !== '' ? $templateStyle : null,
     ]);
 
     
@@ -261,12 +270,14 @@ try {
         'success' => true,
         'message' => 'Post updated successfully.',
         'post' => [
-            'id' => $id,
-            'title' => $title,
-            'excerpt' => $excerpt,
-            'content' => $content,
-            'cover_image' => $coverImage,
-        ],
+    'id' => $id,
+    'title' => $title,
+    'excerpt' => $excerpt,
+    'content' => $content,
+    'cover_image' => $coverImage,
+    'template_name' => $templateName,
+    'template_style' => $templateStyle,
+],
     ]);
 }
 
@@ -340,6 +351,8 @@ if ($method === 'DELETE') {
         $content = trim($input['content'] ?? '');
         $coverImage = $input['cover_image'] ?? null;
         $category = trim($input['category'] ?? '');
+        $templateName = trim($input['template_name'] ?? '');
+$templateStyle = trim($input['template_style'] ?? '');
 
         
 $tags = $input['tags'] ?? [];
@@ -406,9 +419,9 @@ $authorId = (int) $_SESSION['author_id'];
 
 $statement = $pdo->prepare(
     "INSERT INTO posts
-        (author_id, title, excerpt, content, status, cover_image, category)
+        (author_id, title, excerpt, content, status, cover_image, category, template_name, template_style)
      VALUES
-        (:author_id, :title, :excerpt, :content, :status, :cover_image, :category)"
+        (:author_id, :title, :excerpt, :content, :status, :cover_image, :category, :template_name, :template_style)"
 );
 
 
@@ -421,6 +434,8 @@ $statement->execute([
     'status' => $status,
     'cover_image' => $coverImage,
     'category' => $category !== '' ? $category : null,
+    'template_name' => $templateName !== '' ? $templateName : null,
+'template_style' => $templateStyle !== '' ? $templateStyle : null,
 ]);
 
 $postId = (int) $pdo->lastInsertId();
@@ -455,6 +470,8 @@ sendJson(201, [
         'content' => $content,
         'status' => $status,
         'cover_image' => $coverImage,
+        'template_name' => $templateName,
+'template_style' => $templateStyle,
     ],
 ]);
 

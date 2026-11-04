@@ -1115,3 +1115,180 @@
     transition-duration: 0.01ms !important;
   }
 }
+
+
+/* Selected Template Banner */
+.selected-template-banner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 24px;
+  background: #eef3e9;
+  border-bottom: 1px solid #dce5d5;
+  color: #244b35;
+  font-family: inherit;
+}
+
+.selected-template-banner span {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.selected-template-banner strong {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.selected-template-banner small {
+  font-size: 12px;
+  color: #71816f;
+}
+
+
+/* =================================
+   TEMPLATE-BASED POST PREVIEWS
+================================= */
+
+.post-preview {
+  padding: 35px;
+  margin-top: 25px;
+  border-radius: 12px;
+  background: #ffffff;
+  color: #252525;
+  border: 1px solid #e5e5e5;
+  overflow-wrap: anywhere;
+}
+
+.post-preview > img {
+  width: 100%;
+  max-height: 380px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 25px;
+}
+
+.post-preview-category {
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #54745c;
+}
+
+.post-preview h2 {
+  font-family: Georgia, serif;
+  font-size: 34px;
+  line-height: 1.25;
+  margin: 14px 0;
+}
+
+.post-preview-excerpt {
+  font-size: 16px;
+  line-height: 1.7;
+  color: #777;
+}
+
+.post-preview-content {
+  margin-top: 25px;
+  font-size: 16px;
+  line-height: 1.9;
+}
+
+/* Minimal Writer */
+.template-minimal {
+  max-width: 760px;
+  margin-inline: auto;
+  padding: 45px;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.template-minimal h2 {
+  font-size: 38px;
+  font-weight: 400;
+}
+
+/* The Journal - Editorial */
+.template-editorial {
+  border-top: 5px solid #222;
+  border-radius: 0;
+  padding: 40px;
+}
+
+.template-editorial h2 {
+  font-size: 46px;
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+.template-editorial .post-preview-category {
+  color: #a17b43;
+}
+
+/* Midnight Notes - Dark */
+.template-dark {
+  background: #171923;
+  color: #f5f3ee;
+  border-color: #303342;
+}
+
+.template-dark .post-preview-category {
+  color: #c5a36a;
+}
+
+.template-dark .post-preview-excerpt {
+  color: #b5b6c2;
+}
+
+.template-dark .post-preview-content {
+  color: #e0dfdf;
+}
+
+/* Nature Tales */
+.template-nature {
+  background: #f1f5ed;
+  border-color: #d8e4d1;
+  border-radius: 18px;
+}
+
+.template-nature .post-preview-category {
+  color: #55764c;
+}
+
+.template-nature h2 {
+  color: #29452d;
+}
+
+/* Creative Space */
+.template-creative {
+  background: #f7f1ff;
+  border: 2px solid #d9c7f2;
+  border-radius: 22px;
+}
+
+.template-creative h2 {
+  font-family: Arial, sans-serif;
+  font-size: 42px;
+  font-weight: 800;
+  color: #54377d;
+}
+
+.template-creative .post-preview-category {
+  color: #8657b8;
+}
+
+/* The Newsletter */
+.template-clean {
+  background: #fffdf8;
+  border-top: 4px solid #28563b;
+  border-radius: 3px;
+  padding: 40px;
+}
+
+.template-clean h2 {
+  font-size: 36px;
+  color: #234a34;
+}

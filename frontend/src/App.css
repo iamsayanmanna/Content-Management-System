@@ -5852,3 +5852,200 @@ button:focus-visible, a:focus-visible {
   object-fit: cover;
   object-position: center;
 }
+
+
+
+
+
+/* Published Story Template Styles */
+
+.article-reading-content.template-default {
+  --story-bg: #ffffff;
+  --story-text: #252525;
+}
+
+.article-reading-content.template-minimal {
+  --story-bg: #ffffff;
+  --story-text: #252525;
+  max-width: 760px;
+  font-family: Georgia, serif;
+  line-height: 1.9;
+}
+
+.article-reading-content.template-editorial {
+  --story-bg: #faf8f4;
+  --story-text: #29251f;
+  max-width: 900px;
+  font-family: Georgia, serif;
+  line-height: 1.85;
+}
+
+.article-reading-content.template-dark {
+  --story-bg: #171923;
+  --story-text: #f1f1f1;
+  max-width: 850px;
+  padding: 48px;
+  border-radius: 16px;
+  line-height: 1.9;
+}
+
+.article-reading-content.template-nature {
+  --story-bg: #f4f7ef;
+  --story-text: #293b2b;
+  max-width: 850px;
+  padding: 35px;
+  border-radius: 12px;
+  line-height: 1.9;
+}
+
+.article-reading-content.template-creative {
+  --story-bg: #fff8f1;
+  --story-text: #30233d;
+  max-width: 900px;
+  padding: 35px;
+  border-radius: 18px;
+  line-height: 1.85;
+}
+
+.article-reading-content.template-clean {
+  --story-bg: #f8fafc;
+  --story-text: #263445;
+  max-width: 780px;
+  line-height: 1.85;
+}
+
+/* Apply template background and text */
+
+.article-reading-content[class*="template-"] {
+  background: var(--story-bg, #ffffff);
+  color: var(--story-text, #252525);
+  transition: background 0.3s ease;
+}
+
+.article-reading-content[class*="template-"] h1,
+.article-reading-content[class*="template-"] h2,
+.article-reading-content[class*="template-"] h3,
+.article-reading-content[class*="template-"] p {
+  color: inherit;
+}
+
+.article-reading-content[class*="template-"] .article-reading-body {
+  color: inherit;
+}
+
+/* Template Typography */
+
+.article-reading-content.template-minimal h1 {
+  font-family: Georgia, serif;
+  font-weight: 400;
+  letter-spacing: -1.5px;
+}
+
+.article-reading-content.template-editorial h1 {
+  font-family: Georgia, serif;
+  font-size: clamp(38px, 5vw, 58px);
+  font-weight: 500;
+  letter-spacing: -2px;
+}
+
+.article-reading-content.template-dark h1 {
+  color: #ffffff;
+  font-size: clamp(36px, 5vw, 54px);
+}
+
+.article-reading-content.template-nature h1 {
+  color: #294b32;
+  font-family: Georgia, serif;
+}
+
+.article-reading-content.template-creative h1 {
+  color: #6d3b8c;
+  font-weight: 800;
+}
+
+.article-reading-content.template-clean h1 {
+  color: #20334a;
+  font-weight: 700;
+}
+
+/* Content Elements */
+
+.article-reading-content .article-reading-body {
+  font-size: 17px;
+  line-height: 1.9;
+  overflow-wrap: anywhere;
+}
+
+.article-reading-content .article-reading-body h2 {
+  margin: 38px 0 16px;
+  font-size: 30px;
+}
+
+.article-reading-content .article-reading-body h3 {
+  margin: 30px 0 12px;
+  font-size: 23px;
+}
+
+.article-reading-content .article-reading-body blockquote {
+  margin: 28px 0;
+  padding: 18px 24px;
+  border-left: 4px solid #a58a62;
+  background: rgba(160, 140, 110, 0.08);
+  font-style: italic;
+}
+
+.article-reading-content .article-reading-body img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 28px auto;
+  border-radius: 10px;
+}
+
+.article-reading-content .article-reading-body a {
+  color: #98784d;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* =================================
+   CLEAN TEMPLATE — THE NEWSLETTER
+================================= */
+
+.article-reading-content.template-clean {
+  --story-bg: #f8fafc;
+  --story-text: #243247;
+
+  max-width: 800px;
+  padding: 48px 44px;
+  margin: 40px auto;
+  border-top: 4px solid #28543e;
+  border-radius: 4px;
+  font-family: "Inter", sans-serif;
+}
+
+.article-reading-content.template-clean .eyebrow {
+  color: #28543e;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+.article-reading-content.template-clean h1 {
+  color: #243247;
+  font-size: clamp(32px, 5vw, 48px);
+  line-height: 1.2;
+  font-weight: 800;
+  letter-spacing: -1.5px;
+}
+
+.article-reading-content.template-clean .article-reading-body {
+  font-size: 17px;
+  line-height: 1.9;
+  color: #334155;
+}
+
+.article-reading-content.template-clean .article-reading-cover img {
+  border-radius: 8px;
+}
