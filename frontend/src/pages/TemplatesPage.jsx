@@ -78,6 +78,8 @@ function TemplatesPage() {
   const [notifyOpen, setNotifyOpen] = useState(false);
   const [email, setEmail] = useState("");
   const [notifySubmitted, setNotifySubmitted] = useState(false);
+  const [notifyLoading, setNotifyLoading] = useState(false);
+const [notifyMessage, setNotifyMessage] = useState("");
 
   const filteredTemplates = useMemo(() => {
     let result = [...templates];
@@ -129,13 +131,43 @@ function TemplatesPage() {
     window.location.href = "/?useTemplate=1";
   };
 
-  const handleNotify = (e) => {
-    e.preventDefault();
+ const handleNotify = async (e) => {
+  e.preventDefault();
 
-    if (!email.trim()) return;
+  if (!email.trim()) return;
+
+  setNotifyLoading(true);
+  setNotifyMessage("");
+
+  try {
+    const response = await fetch(
+      "http://localhost/Content-Management-System/backend/api/newsletter.php",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email }),
+      }
+    );
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.message || "Subscription failed.");
+    }
 
     setNotifySubmitted(true);
-  };
+    setNotifyMessage(data.message);
+    setEmail("");
+  } catch (error) {
+    setNotifyMessage(
+      error.message || "Something went wrong. Please try again."
+    );
+  } finally {
+    setNotifyLoading(false);
+  }
+};
 
   return (
     <main className="templates-page">
@@ -153,7 +185,7 @@ function TemplatesPage() {
             Templates
           </Link>
           <Link to="/pricing">Pricing</Link>
-          <Link to="/resources">Resources⌄</Link>
+          <Link to="/resources">Resources▼</Link>
         </nav>
 
         <div className="templates-nav-actions">
@@ -165,13 +197,21 @@ function TemplatesPage() {
             ⌕
           </button>
 
-          <Link to="/" className="templates-login">
-            Author Login ↗
-          </Link>
+          <Link
+  to="/"
+  state={{ openLogin: true }}
+  className="templates-login"
+>
+  Author Login ↗
+</Link>
 
-          <Link to="/" className="templates-nav-cta">
-            Get Started <span>＋</span>
-          </Link>
+          <Link
+  to="/"
+  state={{ openRegister: true }}
+  className="templates-nav-cta"
+>
+  Get Started <span>＋</span>
+</Link>
         </div>
       </header>
 
@@ -451,41 +491,61 @@ function TemplatesPage() {
             </button>
 
             {notifySubmitted ? (
-              <>
-                <h2>Thank you!</h2>
-                <p>
-                  Your email has been entered. Notification signup will be
-                  connected to the backend in a later step.
-                </p>
-                <button
-                  className="templates-primary-btn"
-                  onClick={() => setNotifyOpen(false)}
-                >
-                  Close
-                </button>
-              </>
-            ) : (
-              <>
-                <h2>Stay in the loop.</h2>
-                <p>
-                  Enter your email to express interest in upcoming templates.
-                </p>
+  <div className="notify-success">
+    <div className="notify-success-icon">✓</div>
 
-                <form onSubmit={handleNotify}>
-                  <input
-                    type="email"
-                    placeholder="Your email address"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                  />
+    <span className="notify-success-label">SUBSCRIPTION CONFIRMED</span>
 
-                  <button type="submit" className="templates-primary-btn">
-                    Notify Me →
-                  </button>
-                </form>
-              </>
-            )}
+    <h2>You're on the list!</h2>
+
+    <p>
+      Thank you for joining the PenSpace community.
+      We'll let you know when new templates arrive.
+      Until then, keep creating something wonderful.
+    </p>
+
+    <button
+      className="templates-primary-btn"
+      onClick={() => setNotifyOpen(false)}
+    >
+      Sounds Great →
+    </button>
+  </div>
+) : (
+  <>
+    <span className="notify-modal-label">PENSPACE COMMUNITY</span>
+
+    <h2>Stay in the loop.</h2>
+
+    <p>
+      Be the first to discover new templates, creative designs,
+      and updates from PenSpace.
+    </p>
+
+    <form onSubmit={handleNotify}>
+      <input
+        type="email"
+        placeholder="Your email address"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        required
+        disabled={notifyLoading}
+      />
+
+      {notifyMessage && (
+        <p className="notify-error-message">{notifyMessage}</p>
+      )}
+
+      <button
+        type="submit"
+        className="templates-primary-btn"
+        disabled={notifyLoading}
+      >
+        {notifyLoading ? "Subscribing..." : "Notify Me →"}
+      </button>
+    </form>
+  </>
+)}
           </div>
         </div>
       )}

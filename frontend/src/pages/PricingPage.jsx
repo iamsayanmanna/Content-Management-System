@@ -1,10 +1,12 @@
 
 import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "./PricingPage.css";
 import pricingLeafLeft from "../assets/pricing-leaf-left.png";
 import pricingLeafRight from "../assets/pricing-leaf-right.png";
 
 function PricingPage() {
+  const navigate = useNavigate();
   const [billing, setBilling] = useState("monthly");
   const [activeFaq, setActiveFaq] = useState(0);
 
@@ -100,28 +102,39 @@ function PricingPage() {
 
       
 <header className="topbar">
-  <a className="brand" href="/">
+  <Link className="brand" to="/">
     <span className="brand-mark">P</span>
-    <span>Pen<span className="brand-light">Space</span></span>
-  </a>
+    <span>
+      Pen<span className="brand-light">Space</span>
+    </span>
+  </Link>
 
   <nav className="top-nav" aria-label="Main navigation">
-    <a href="/">Home</a>
-    <a href="/features">Features</a>
-    <a href="/templates">Templates</a>
-    <a className="nav-active" href="/pricing">Pricing</a>
-    <a className="nav-resource" href="/resources">
-      Resources <span aria-hidden="true">⌄</span>
-    </a>
+    <Link to="/">Home</Link>
+    <Link to="/features">Features</Link>
+    <Link to="/templates">Templates</Link>
+    <Link className="nav-active" to="/pricing">Pricing</Link>
+    <Link className="nav-resource" to="/resources">
+      Resources <span aria-hidden="true">▼</span>
+    </Link>
   </nav>
 
   <div className="author-auth-actions">
-    <a className="author-link" href="/?login=1">
+    <Link
+      className="author-link"
+      to="/"
+      state={{ openLogin: true }}
+    >
       Author Login <span>↗</span>
-    </a>
-    <a className="header-cta" href="/?register=1">
+    </Link>
+
+    <Link
+      className="header-cta"
+      to="/"
+      state={{ openRegister: true }}
+    >
       Get Started <span>+</span>
-    </a>
+    </Link>
   </div>
 </header>
 
@@ -210,12 +223,14 @@ function PricingPage() {
             <button
               className={`plan-button ${plan.popular ? "primary" : ""}`}
               onClick={() => {
-                if (plan.name === "Free") {
-                  window.location.href = "/?register=1";
-                } else {
-                  alert("Paid plan checkout will be available soon.");
-                }
-              }}
+  if (plan.name === "Free") {
+    navigate("/", {
+      state: { openRegister: true },
+    });
+  } else {
+    alert("Paid plan checkout will be available soon.");
+  }
+}}
             >
               {plan.button}
               {plan.popular && <span>→</span>}

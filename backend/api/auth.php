@@ -43,18 +43,20 @@ if (empty($_SESSION['author_id'])) {
 try {
     $statement = $pdo->prepare(
         'SELECT
-    id,
-    username,
-    email,
-    profile_image,
-    bio,
-    website,
-    instagram,
-    linkedin,
-    github
-FROM authors
-WHERE id = :id
-LIMIT 1'
+            id,
+            name,
+            author_id,
+            username,
+            email,
+            profile_image,
+            bio,
+            website,
+            instagram,
+            linkedin,
+            github
+         FROM authors
+         WHERE id = :id
+         LIMIT 1'
     );
 
     $statement->execute([
@@ -78,17 +80,20 @@ LIMIT 1'
         'success' => true,
         'authenticated' => true,
         'author' => [
-    'id' => (int) $author['id'],
-    'username' => $author['username'],
-    'email' => $author['email'],
-    'profile_image' => $author['profile_image'],
-    'bio' => $author['bio'],
-    'website' => $author['website'],
-    'instagram' => $author['instagram'],
-    'linkedin' => $author['linkedin'],
-    'github' => $author['github']
-]
+            'id' => (int) $author['id'],
+            'name' => $author['name'],
+            'author_id' => $author['author_id'],
+            'username' => $author['username'],
+            'email' => $author['email'],
+            'profile_image' => $author['profile_image'],
+            'bio' => $author['bio'],
+            'website' => $author['website'],
+            'instagram' => $author['instagram'],
+            'linkedin' => $author['linkedin'],
+            'github' => $author['github']
+        ]
     ]);
+
 } catch (PDOException $exception) {
     error_log('PenSpace auth check error: ' . $exception->getMessage());
 

@@ -354,7 +354,7 @@ const handleProfileUpdate = async (event) => {
             <div className="profile-sidebar-info">
 
               <span className="profile-author-id">
-  Author ID: {author.id}
+  Author ID: {author.author_id || "Not assigned"}
 </span>
 
   <h2>{author.username}</h2>

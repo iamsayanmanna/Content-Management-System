@@ -1,5 +1,6 @@
 
 import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import "./App.css";
 import { Helmet } from "react-helmet-async";
 import AuthorLogin from "./pages/AuthorLogin";
@@ -56,6 +57,8 @@ function getReadingMinutes(article) {
 }
 
 function HomePage() {
+
+  const location = useLocation();
 
 const [articles, setArticles] = useState([]);
 const [searchQuery, setSearchQuery] = useState("");
@@ -163,8 +166,34 @@ useEffect(() => {
   const [showDashboard, setShowDashboard] = useState(false);
   const [showRegister, setShowRegister] = useState(false);
 
-  useEffect(() => {
+useEffect(() => {
+  if (location.state?.openRegister) {
+    setShowLogin(false);
+    setShowDashboard(false);
+    setShowRegister(true);
+  }
+
+  if (location.state?.openLogin) {
+    setShowRegister(false);
+    setShowDashboard(false);
+    setShowLogin(true);
+  }
+}, [location]);
+
+ useEffect(() => {
   const params = new URLSearchParams(window.location.search);
+
+  if (params.get("login") === "1") {
+    setShowRegister(false);
+    setShowDashboard(false);
+    setShowLogin(true);
+  }
+
+  if (params.get("register") === "1") {
+    setShowLogin(false);
+    setShowDashboard(false);
+    setShowRegister(true);
+  }
 
   if (params.get("useTemplate") === "1") {
     setShowLogin(true);
@@ -173,13 +202,18 @@ useEffect(() => {
 
 if (showLogin) {
   return (
-    <AuthorLogin
-      onBack={() => setShowLogin(false)}
-      onLoginSuccess={() => {
-        setShowLogin(false);
-        setShowDashboard(true);
-      }}
-    />
+   <AuthorLogin
+  onBack={() => setShowLogin(false)}
+  onRegister={() => {
+    setShowLogin(false);
+    setShowDashboard(false);
+    setShowRegister(true);
+  }}
+  onLoginSuccess={() => {
+    setShowLogin(false);
+    setShowDashboard(true);
+  }}
+/>
   );
 }
 
@@ -187,12 +221,17 @@ if (showLogin) {
 if (showRegister) {
   return (
     <AuthorRegister
-      onBack={() => setShowRegister(false)}
-      onRegisterSuccess={() => {
-        setShowRegister(false);
-        setShowLogin(true);
-      }}
-    />
+  onBack={() => setShowRegister(false)}
+  onLogin={() => {
+    setShowRegister(false);
+    setShowDashboard(false);
+    setShowLogin(true);
+  }}
+  onRegisterSuccess={() => {
+    setShowRegister(false);
+    setShowLogin(true);
+  }}
+/>
   );
 }
 
@@ -408,13 +447,16 @@ return (
   </a>
 
   <nav className="top-nav" aria-label="Main navigation">
-    <a className="nav-active" href="#home">Home</a>
+    <a className="nav-active" href="#home">
+  Home
+  <span className="nav-active-indicator" />
+</a>
     <a href="/features">Features</a>
-    <a href="#templates">Templates</a>
-    <a href="#pricing">Pricing</a>
-    <a className="nav-resource" href="#resources">
-      Resources <span aria-hidden="true">⌄</span>
-    </a>
+    <a href="/templates">Templates</a>
+<a href="/pricing">Pricing</a>
+<a className="nav-resource" href="/resources">
+  Resources <span aria-hidden="true">▼</span>
+</a>
   </nav>
 
   <div className="author-auth-actions">
@@ -801,9 +843,10 @@ return (
           <button
   className="secondary-button"
   type="button"
-  onClick={() => {
+onClick={() => {
   setShowLogin(false);
-  setShowDashboard(true);
+  setShowDashboard(false);
+  setShowRegister(true);
 }}
 >
   Author workspace <span aria-hidden="true">→</span>

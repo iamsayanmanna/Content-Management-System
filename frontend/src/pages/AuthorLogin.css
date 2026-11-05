@@ -559,3 +559,30 @@
     transition-duration: 0.01ms !important;
   }
 }
+
+
+
+/* Registration link on login page */
+
+.login-register-prompt {
+  margin: 16px 0;
+  text-align: center;
+  color: #85877d;
+  font-size: 13px;
+}
+
+.login-register-link {
+  border: none;
+  background: transparent;
+  padding: 0;
+  color: #294b37;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.login-register-link:hover {
+  color: #71836a;
+  text-decoration: underline;
+}

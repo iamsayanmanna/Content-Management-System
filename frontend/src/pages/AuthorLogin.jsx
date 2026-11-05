@@ -60,7 +60,7 @@ const Icon = ({ name, size = 20 }) => {
   return <svg {...common}>{paths[name]}</svg>;
 };
 
-function AuthorLogin({ onBack, onLoginSuccess }) {
+function AuthorLogin({ onBack, onRegister, onLoginSuccess }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -190,10 +190,21 @@ function AuthorLogin({ onBack, onLoginSuccess }) {
         </form>
 
         <p className="login-note">
-          Author access only. Please use your authorized account.
-        </p>
+  Author access only. Please use your authorized account.
+</p>
 
-        <div className="login-card-divider" />
+<p className="login-register-prompt">
+  Don't have an account?{" "}
+  <button
+    type="button"
+    className="login-register-link"
+    onClick={onRegister}
+  >
+    Create an account →
+  </button>
+</p>
+
+<div className="login-card-divider" />
 
         <button
           className="login-home-link"

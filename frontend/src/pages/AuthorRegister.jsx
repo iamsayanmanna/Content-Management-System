@@ -29,7 +29,8 @@ const Icon = ({ name, size = 20 }) => {
   return <svg {...common}>{paths[name]}</svg>;
 };
 
-function AuthorRegister({ onBack, onRegisterSuccess }) {
+function AuthorRegister({ onBack, onLogin, onRegisterSuccess }) {
+  const [name, setName] = useState("");
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -43,7 +44,7 @@ function AuthorRegister({ onBack, onRegisterSuccess }) {
     event.preventDefault();
     setError("");
 
-    if (!username.trim() || !email.trim() || !password || !confirmPassword) {
+    if (!name.trim() || !username.trim() || !email.trim() || !password || !confirmPassword) {
       setError("Please fill in all fields.");
       return;
     }
@@ -66,7 +67,7 @@ function AuthorRegister({ onBack, onRegisterSuccess }) {
     setLoading(true);
 
     try {
-      await registerAuthor(username.trim(), email.trim(), password);
+      await registerAuthor(name.trim(), username.trim(), email.trim(), password);
       onRegisterSuccess();
     } catch (error) {
       setError(error.message || "Registration failed. Please try again.");
@@ -149,41 +150,63 @@ function AuthorRegister({ onBack, onRegisterSuccess }) {
           </p>
 
           <form className="register-form" onSubmit={handleSubmit}>
-            <div className="register-field">
-              <label htmlFor="register-username">Username</label>
-              <div className="register-input-wrap">
-                <Icon name="user" />
-                <input
-                  id="register-username"
-                  type="text"
-                  placeholder="Choose a username"
-                  value={username}
-                  onChange={(event) => setUsername(event.target.value)}
-                  minLength={3}
-                  maxLength={50}
-                  pattern="[A-Za-z0-9_]+"
-                  title="Use 3–50 letters, numbers, or underscores."
-                  autoComplete="username"
-                  required
-                />
-              </div>
-            </div>
+  {/* Name */}
+  <div className="register-field">
+    <label htmlFor="register-name">Name</label>
+    <div className="register-input-wrap">
+      <Icon name="user" />
+      <input
+        id="register-name"
+        type="text"
+        placeholder="Enter your full name"
+        value={name}
+        onChange={(event) => setName(event.target.value)}
+        maxLength={100}
+        autoComplete="name"
+        required
+      />
+    </div>
+  </div>
 
-            <div className="register-field">
-              <label htmlFor="register-email">Email</label>
-              <div className="register-input-wrap">
-                <Icon name="mail" />
-                <input
-                  id="register-email"
-                  type="email"
-                  placeholder="you@example.com"
-                  value={email}
-                  onChange={(event) => setEmail(event.target.value)}
-                  autoComplete="email"
-                  required
-                />
-              </div>
-            </div>
+  {/* Username */}
+  <div className="register-field">
+    <label htmlFor="register-username">Username</label>
+    <div className="register-input-wrap">
+      <Icon name="user" />
+      <input
+        id="register-username"
+        type="text"
+        placeholder="Choose a username"
+        value={username}
+        onChange={(event) => setUsername(event.target.value)}
+        minLength={3}
+        maxLength={50}
+        pattern="[A-Za-z0-9_]+"
+        title="Use 3–50 letters, numbers, or underscores."
+        autoComplete="username"
+        required
+      />
+    </div>
+  </div>
+
+  {/* Email */}
+  <div className="register-field">
+    <label htmlFor="register-email">Email</label>
+    <div className="register-input-wrap">
+      <Icon name="mail" />
+      <input
+        id="register-email"
+        type="email"
+        placeholder="you@example.com"
+        value={email}
+        onChange={(event) => setEmail(event.target.value)}
+        autoComplete="email"
+        required
+      />
+    </div>
+  </div>
+
+           
 
             <div className="register-field">
               <label htmlFor="register-password">Password</label>
@@ -256,9 +279,22 @@ function AuthorRegister({ onBack, onRegisterSuccess }) {
             </button>
           </form>
 
-          <p className="register-card-note">
-            A considered space for the written word.
-          </p>
+          <div className="register-card-footer">
+  <p className="register-login-prompt">
+    Already have an account?{" "}
+    <button
+      type="button"
+      className="register-login-link"
+      onClick={onLogin}
+    >
+      Log in →
+    </button>
+  </p>
+
+  <p className="register-card-note">
+    A considered space for the written word.
+  </p>
+</div>
         </div>
       </section>
     </main>

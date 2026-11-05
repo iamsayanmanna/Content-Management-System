@@ -524,3 +524,42 @@
     animation-iteration-count: 1 !important;
   }
 }
+
+
+
+/* Registration page - Login link styling */
+
+.register-card-footer {
+  margin-top: 12px;
+  text-align: center;
+}
+
+.register-login-prompt {
+  margin: 0 0 16px;
+  color: #777b70;
+  font-size: 13px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+
+.register-login-link {
+  border: none;
+  background: transparent;
+  padding: 0;
+  color: #294b37;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.register-login-link:hover {
+  color: #71836a;
+  text-decoration: underline;
+}
+
+.register-card-footer .register-card-note {
+  margin: 0;
+}

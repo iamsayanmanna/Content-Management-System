@@ -50,6 +50,7 @@ function AuthorDashboard() {
   const [currentPage, setCurrentPage] = useState(1);
   const [editingPost, setEditingPost] = useState(null);
   const [authChecking, setAuthChecking] = useState(true);
+  const [author, setAuthor] = useState(null);
   const [postsLoading, setPostsLoading] = useState(true);
   const [postsError, setPostsError] = useState("");
   const [notification, setNotification] = useState({
@@ -129,7 +130,7 @@ function AuthorDashboard() {
           window.location.href = "/";
           return;
         }
-
+        setAuthor(author);
         setAuthChecking(false);
       })
       .catch((error) => {
@@ -327,6 +328,30 @@ function AuthorDashboard() {
             Create post
           </button>
         </div>
+
+
+                <section className="author-identity-card">
+          <div className="author-identity-avatar">
+            {(author?.name || author?.username || "A")
+              .charAt(0)
+              .toUpperCase()}
+          </div>
+
+          <div className="author-identity-info">
+            <span className="author-identity-label">
+              AUTHOR IDENTITY
+            </span>
+
+            <h2>{author?.name || author?.username || "Author"}</h2>
+
+            <p>@{author?.username || "author"}</p>
+          </div>
+
+          <div className="author-identity-code">
+            <span>YOUR AUTHOR ID</span>
+            <strong>{author?.author_id || "Not assigned"}</strong>
+          </div>
+        </section>
 
         <section className="dashboard-stats">
           <article className="dashboard-stat-card">

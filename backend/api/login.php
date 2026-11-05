@@ -52,18 +52,18 @@ if ($identifier === '' || !is_string($password) || $password === '') {
 }
 
 try {
-    
-$statement = $pdo->prepare(
-    'SELECT id, username, email, password_hash
-     FROM authors
-     WHERE username = :username OR email = :email
-     LIMIT 1'
-);
 
-$statement->execute([
-    'username' => $identifier,
-    'email' => $identifier
-]);
+    $statement = $pdo->prepare(
+        'SELECT id, name, author_id, username, email, password_hash
+         FROM authors
+         WHERE username = :username OR email = :email
+         LIMIT 1'
+    );
+
+    $statement->execute([
+        'username' => $identifier,
+        'email' => $identifier
+    ]);
 
     $author = $statement->fetch();
 
@@ -78,6 +78,8 @@ $statement->execute([
 
     $_SESSION['author_id'] = (int) $author['id'];
     $_SESSION['author_username'] = $author['username'];
+    $_SESSION['author_name'] = $author['name'];
+    $_SESSION['author_code'] = $author['author_id'];
     $_SESSION['last_activity'] = time();
 
     sendJson(200, [
@@ -85,11 +87,15 @@ $statement->execute([
         'message' => 'Login successful.',
         'author' => [
             'id' => (int) $author['id'],
+            'name' => $author['name'],
+            'author_id' => $author['author_id'],
             'username' => $author['username'],
             'email' => $author['email']
         ]
     ]);
+
 } catch (PDOException $exception) {
+
     error_log('PenSpace login error: ' . $exception->getMessage());
 
     sendJson(500, [

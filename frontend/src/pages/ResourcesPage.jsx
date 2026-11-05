@@ -159,7 +159,7 @@ const handleSubscribe = async (e) => {
           <a href="/features">Features</a>
           <a href="/templates">Templates</a>
           <a href="/pricing">Pricing</a>
-          <a href="/resources" className="active">Resources⌄</a>
+          <a href="/resources" className="active">Resources▼</a>
         </nav>
 
         <div className="resources-nav-actions">

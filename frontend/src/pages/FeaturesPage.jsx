@@ -50,12 +50,24 @@ function FeaturesPage() {
           <Link to="/features" className="active">Features</Link>
           <Link to="/templates">Templates</Link>
           <Link to="/pricing">Pricing</Link>
-          <Link to="/resources">Resources <span>⌄</span></Link>
+          <Link to="/resources">Resources <span>▼</span></Link>
         </nav>
 
         <div className="features-nav-actions">
-          <Link to="/" className="features-login">Author Login ↗</Link>
-          <Link to="/" className="features-nav-cta">Get Started <span>+</span></Link>
+          <Link
+  to="/"
+  state={{ openLogin: true }}
+  className="features-login"
+>
+  Author Login ↗
+</Link>
+          <Link
+  to="/"
+  state={{ openRegister: true }}
+  className="features-nav-cta"
+>
+  Get Started <span>+</span>
+</Link>
         </div>
       </header>
 
@@ -78,9 +90,13 @@ function FeaturesPage() {
             </p>
 
             <div className="features-hero-buttons">
-              <Link to="/" className="features-primary-btn">
-                Get Started Free <span>→</span>
-              </Link>
+              <Link
+  to="/"
+  state={{ openRegister: true }}
+  className="features-primary-btn"
+>
+  Get Started Free <span>→</span>
+</Link>
 
               <Link to="/templates" className="features-secondary-btn">
                 <span>▦</span> Explore Templates
@@ -156,10 +172,13 @@ function FeaturesPage() {
               publish, and grow your ideas.
             </p>
           </div>
-
-          <Link to="/" className="features-primary-btn">
-            Create Your Account <span>→</span>
-          </Link>
+<Link
+  to="/"
+  state={{ openRegister: true }}
+  className="features-primary-btn"
+>
+  Create Your Account <span>→</span>
+</Link>
         </section>
       </main>
 

@@ -58,7 +58,8 @@ export async function logoutAuthor() {
 
 
 
-export async function registerAuthor(username, email, password) {
+
+export async function registerAuthor(name, username, email, password) {
   let response;
 
   try {
@@ -69,6 +70,7 @@ export async function registerAuthor(username, email, password) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
+        name,
         username,
         email,
         password,
@@ -96,6 +98,7 @@ export async function registerAuthor(username, email, password) {
 
   return data;
 }
+
 
 
 export async function updateAuthorProfile(
