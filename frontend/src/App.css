@@ -6044,3 +6044,89 @@ button:focus-visible, a:focus-visible {
 .article-reading-content.template-clean .article-reading-cover img {
   border-radius: 8px;
 }
+
+
+
+
+/* FIX: Responsive Article Reading Page */
+.article-reading-page {
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0 24px 60px;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+.article-reading-page .topbar {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.article-reading-content {
+  width: 100%;
+  max-width: 900px;
+  margin: 32px auto 0;
+  padding: 32px;
+  box-sizing: border-box;
+  min-width: 0;
+}
+
+.article-reading-cover {
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.article-reading-cover img {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.article-reading-content h1,
+.article-reading-content h2,
+.article-reading-content h3,
+.article-reading-body,
+.article-reading-excerpt {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+
+.article-reading-body img,
+.article-reading-body video,
+.article-reading-body iframe {
+  max-width: 100%;
+}
+
+.article-reading-body img {
+  height: auto;
+}
+
+.article-tags,
+.article-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.related-articles-grid {
+  width: 100%;
+  max-width: 100%;
+}
+
+@media (max-width: 768px) {
+  .article-reading-page {
+    padding: 0 14px 40px;
+  }
+
+  .article-reading-content {
+    margin-top: 20px;
+    padding: 20px 14px;
+  }
+}
